@@ -53,7 +53,7 @@ struct CardView: View {
       // this is to make the font / sizes dynamic
       // lets you get the value of the view so width / height - think portrait / landscape etc
       GeometryReader { geometry in
-            self.body(for: geometry.s
+            self.body(for: geometry.size)
     }
 
     // Function to allow not having to put in selfs in the code (so Zstack moves into the function 
