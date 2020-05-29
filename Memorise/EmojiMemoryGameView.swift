@@ -30,9 +30,12 @@ struct EmojiMemoryGameView: View {
             // Change largeTitle to other when 5 cards
             //.font(Font.largeTitle)
             //.font(Font.custom(viewModel.cards.count < 5 ? "largeTitle" : "Title"))
-            .font(viewModel.cards.count < 5 ? .largeTitle : .title)
+            // this is now being done via geometry in the CardView
+            //.font(viewModel.cards.count < 5 ? .largeTitle : .title)
         // MARK: A1.Q3
-            .scaleEffect(2/3)
+            // this should be .aspectRatio 
+            //.scaleEffect(2/3)
+            .aspectRatio(2/3)
     }
 }
 
@@ -47,15 +50,37 @@ struct CardView: View {
     */
     
     var body: some View {
-        ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
-                Text(card.content)
-            } else {
-                RoundedRectangle(cornerRadius: 10.0).fill()
+      // this is to make the font / sizes dynamic
+      // lets you get the value of the view so width / height - think portrait / landscape etc
+      GeometryReader { geometry in
+            self.body(for: geometry.s
+    }
+
+    // Function to allow not having to put in selfs in the code (so Zstack moves into the function 
+    // and gets called above
+    func body(for size: CGSize) -> some view {
+      ZStack {
+                if card.isFaceUp {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                    Text(card.content)
+                } else {
+                    RoundedRectangle(cornerRadius: cornerRadius).fill()
+                }
             }
+            // because of padding and the card border need the modifier (0.75)
+            // the 0.75 "magic" number should be defined else where
+            .font(Font.system(size: fontSize(for: size)))
         }
+    }
+  
+    // MARK: - Drawing Constants
+    // this would infer int which RoundedRect does not expect
+    //let cornerRadius = 10
+    let cornerRadius: CGFloat = 10
+    let edgeLineWidth: CGFloat = 3
+    func fontSize(for size: CGSize) -> CGFloat {
+      min(size.width, size.height) * 0.75
     }
 }
 
