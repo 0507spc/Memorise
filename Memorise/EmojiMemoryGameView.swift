@@ -35,7 +35,7 @@ struct EmojiMemoryGameView: View {
         // MARK: A1.Q3
             // this should be .aspectRatio 
             //.scaleEffect(2/3)
-            .aspectRatio(2/3)
+            .aspectRatio(2/3, contentMode: .fit)
     }
 }
 
@@ -52,13 +52,14 @@ struct CardView: View {
     var body: some View {
       // this is to make the font / sizes dynamic
       // lets you get the value of the view so width / height - think portrait / landscape etc
-      GeometryReader { geometry in
+        GeometryReader { geometry in
             self.body(for: geometry.size)
+        }
     }
 
     // Function to allow not having to put in selfs in the code (so Zstack moves into the function 
     // and gets called above
-    func body(for size: CGSize) -> some view {
+    func body(for size: CGSize) -> some View {
       ZStack {
                 if card.isFaceUp {
                     RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
@@ -72,8 +73,7 @@ struct CardView: View {
             // the 0.75 "magic" number should be defined else where
             .font(Font.system(size: fontSize(for: size)))
         }
-    }
-  
+
     // MARK: - Drawing Constants
     // this would infer int which RoundedRect does not expect
     //let cornerRadius = 10
