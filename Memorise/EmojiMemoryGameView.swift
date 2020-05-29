@@ -22,7 +22,11 @@ struct EmojiMemoryGameView: View {
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
-            }
+            }.aspectRatio(2/3, contentMode: .fit)
+            // MARK: A1.Q3
+                // this should be .aspectRatio
+                //.scaleEffect(2/3)
+                //.aspectRatio(2/3, contentMode: .fit)
         }
             .padding()
             .foregroundColor(Color.orange)
@@ -32,10 +36,8 @@ struct EmojiMemoryGameView: View {
             //.font(Font.custom(viewModel.cards.count < 5 ? "largeTitle" : "Title"))
             // this is now being done via geometry in the CardView
             //.font(viewModel.cards.count < 5 ? .largeTitle : .title)
-        // MARK: A1.Q3
-            // this should be .aspectRatio 
-            //.scaleEffect(2/3)
-            .aspectRatio(2/3, contentMode: .fit)
+        // Had put Al.Q3 here - but this is for the view, the scale has to
+        // be on each card to work and not on the actual view
     }
 }
 
