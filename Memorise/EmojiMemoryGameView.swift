@@ -17,17 +17,21 @@ struct EmojiMemoryGameView: View {
     
     
     var body: some View {
-        HStack {
-            ForEach(viewModel.cards) { card in
+        // Changing this to a grid - which needs to be written
+        //HStack {
+        //     ForEach(viewModel.cards) { card in
+        // Two arguments - viewmodel and the fucntion (card)
+        Grid(viewModel.cards) { card in
                 CardView(card: card).onTapGesture {
                     self.viewModel.choose(card: card)
                 }
-            }.aspectRatio(2/3, contentMode: .fit)
+                .aspectRatio(2/3, contentMode: .fit)
+                .padding(5)
+            }
             // MARK: A1.Q3
                 // this should be .aspectRatio
                 //.scaleEffect(2/3)
                 //.aspectRatio(2/3, contentMode: .fit)
-        }
             .padding()
             .foregroundColor(Color.orange)
         // MARK: A1.Q5

@@ -17,7 +17,10 @@ struct MemoryGame<CardContent> {
     mutating func choose(card: Card) {
         print("card chosen: \(card)")
         // game logic
-        let chosenIndex: Int = self.index(of: card)
+        // Can use the nex array extension
+        //let chosenIndex: Int = self.index(of: card)
+        let chosenIndex: Int = cards.firstIndex(matching: card)
+        
         // get card out of array and flip
         //let chosenCard: Card = self.cards[chosenIndex]
         //chosenCard.isFaceUp= !chosenCard.isFaceUp
@@ -26,6 +29,7 @@ struct MemoryGame<CardContent> {
     }
     
     // 'of' external 'card' internal names
+    /*
     func index(of card: Card) -> Int {
         // this just gets the index
         // card is identifiable see below
@@ -38,6 +42,7 @@ struct MemoryGame<CardContent> {
         // when not found
         return 0 // TODO: bogus!
     }
+    */
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>() // empty array
