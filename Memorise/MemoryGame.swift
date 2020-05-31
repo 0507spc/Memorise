@@ -8,24 +8,82 @@
 // This is the model
 
 import Foundation
-
-struct MemoryGame<CardContent> {
+// thisbis the model
+struct MemoryGame<CardContent> where CardContent: Equatable { // memory game only works when cards are comparable (constrains)
     var cards: Array<Card>
+    
+    // This is for matching in the game
+    var indexOfTehOneAndOnlyFaceUpCard: Int? {
+        get { cards.indices.filter { cards[$0].isFaceUp }.only }
+                
+            // Below is replaced by above
+            /*
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            */
+                
+            // Below is replaced by extension of Array
+            /*
+            if faceUpCardIndices.count == 1 {
+                // this is the nil
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+            */
+        set {
+            for index in cards.indices {
+                // newValue looks for changes only for computed / when changed
+                /*if index == newValue {
+                    cards[index].isFaceUp = true
+                } else {
+                    cards[index].isFaceUp = false
+                }*/
+                // the if above can be replaced by:
+                cards[index].isFaceUp = index == newValue
+            }
+        }
+    }
     
     // functions in STRUCTS are immutable by default
     // make mutating to allow changing
     mutating func choose(card: Card) {
-        print("card chosen: \(card)")
+        //print("card chosen: \(card)") // consolse debugging
         // game logic
         // Can use the nex array extension
         //let chosenIndex: Int = self.index(of: card)
-        let chosenIndex: Int = cards.firstIndex(matching: card)
-        
-        // get card out of array and flip
-        //let chosenCard: Card = self.cards[chosenIndex]
-        //chosenCard.isFaceUp= !chosenCard.isFaceUp
-        // need reactie UI to make this take effect
-        self.cards[chosenIndex].isFaceUp = !self.cards[chosenIndex].isFaceUp
+        // after the && is for matching component, , is sequential && (so && = ,)
+        if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched { // run when NOT nil
+            if let potentialMatchIndex = indexOfTehOneAndOnlyFaceUpCard {
+                // == can't do ==, as it is a don't care it doesn't know the type
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    // we have a match
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                // this is not needed with the get / set computed
+                //indexOfTehOneAndOnlyFaceUpCard = nil
+                self.cards[chosenIndex].isFaceUp = true
+            } else {
+                // This is managed by the get / set
+                //for index in cards.indices {
+                //    cards[index].isFaceUp = false
+                //}
+                indexOfTehOneAndOnlyFaceUpCard = chosenIndex
+            }
+            
+            // get card out of array and flip
+            //let chosenCard: Card = self.cards[chosenIndex]
+            //chosenCard.isFaceUp= !chosenCard.isFaceUp
+            // need reactie UI to make this take effect
+            //self.cards[chosenIndex].isFaceUp = !self.cards[chosenIndex].isFaceUp
+            // this is now done above and not needed here
+            //self.cards[chosenIndex].isFaceUp = true
+        }
     }
     
     // 'of' external 'card' internal names
@@ -57,7 +115,7 @@ struct MemoryGame<CardContent> {
     
     // value types are copied (never altered)
     struct Card: Identifiable {
-        var isFaceUp: Bool = true
+        var isFaceUp: Bool = false
         var isMatched: Bool = false
         var content: CardContent // This would be image / sound / whatever
         var id: Int

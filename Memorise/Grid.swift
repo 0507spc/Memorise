@@ -31,15 +31,28 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
             self.body(for: item, in: layout)
         }
     }
-    
+/*  // This handles when the index is nil
     func body(for item: Item, in layout: GridLayout) -> some View {
         //let index = self.index(of: item)
         let index = items.firstIndex(matching: item)
-        
+        // Group allows the code to pass a view when it is nil
+        return Group {
+            if index != nil {
+                viewForItem(item)
+                    .frame(width: layout.itemSize.width, height: layout.itemSize.height)
+                    .position(layout.location(ofItemAt: index!)) // index! would crash the program without the check (this can be useful)
+            }
+        }
+    }
+*/
+    // --- OR ---
+    // this does not handle when the index is nil - will crash - which can be fine
+    func body(for item: Item, in layout: GridLayout) -> some View {
+        //let index = self.index(of: item)
+        let index = items.firstIndex(matching: item)!
         return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
-            .position(layout.location(ofItemAt: index))
+            .position(layout.location(ofItemAt: index)) // index! would crash the program without the check (this can be useful) (! optional is moved to above
     }
-    
 }
 
