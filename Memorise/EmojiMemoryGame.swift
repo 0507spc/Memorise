@@ -39,6 +39,7 @@ class EmojiMemoryGame: ObservableObject {
         // MARK: A1.Q2 & A1.Q4.A
         // This shuffles the array of cards to use, then we need to shuffle the actual "deck"
         let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled() // TODO: shuffle below as well otherwise they are all still together in pairs
+        // the double shuffle is to make 2 pairs not always have the same emojis
         // MARK: A1.Q4.B
         //return MemoryGame<String>(numberOfPairsOfCards: emojis.count) { pairIndex in
         // Mace the count between 2 and 5
@@ -57,7 +58,11 @@ class EmojiMemoryGame: ObservableObject {
         model.cards
     }
     
-    
+    // here could be the get theme function
+    //let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
+    //let emojis = [⚽️🏀🏈⚾️🥎🎾🎱🏉🏐].shuffled()
+    //let emojis = [🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵🐤].shuffled()
+    //let emojis = [🍏🍎🍐🍊🍋🍌🍉🍇🍓🍒🥭].shuffled()
     
     
     // intents allow users to get / chnge cards
