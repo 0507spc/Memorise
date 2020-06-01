@@ -45,15 +45,17 @@ class EmojiMemoryGame: ObservableObject {
         //      Number of cards to show
         //      One theme should be random number of cards to show
         //      Appropriate colour - i.e. halloween is orange
+        // need a function that takes, name, array of emoji, number to use (or random i.e. none) , colour
         // Themes should be 1 line of code
+        /*
         let halloweenEmojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
         let sportsBallsEmojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"].shuffled()
         let animalEmojis = ["🐶","🐱","🐭","🐹","🐰","🐻","🐼","🐯","🦁","🐮","🐷","🐸","🐵","🐤"].shuffled()
         let fruitEmojis = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍒","🥭"].shuffled()
         let faceEmojis = ["😀","😍","😝","🤪","😎","😱","😴","😲"].shuffled()
         let vehicleEmojis = ["✈️","🚁","🚘","🚀","🚤","⛵️","🚜","🚌","🚲"].shuffled()
-        
-        let themesArray = [halloweenEmojis,sportsBallsEmojis,animalEmojis,fruitEmojis,faceEmojis,vehicleEmojis].shuffled()
+        */
+        let themesArray = ["halloween","sport","animal","fruit","face","vehicle"].shuffled()
         
         //let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled() // TODO: shuffle below as well otherwise they are all still together in pairs
         let emojis = themesArray[0]
@@ -69,21 +71,16 @@ class EmojiMemoryGame: ObservableObject {
             return emojis[pairIndex]
         }
     }
-       
+    
+    enum theme {
+        case case
+    }
     
     // MARK: - Access to the Model / i.e. cards
     
     var cards: Array<MemoryGame<String>.Card> {
         model.cards
     }
-    
-    // here could be the get theme function
-    //let halloweenEmojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
-    //let sportsBallsEmojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"].shuffled()
-    //let animalEmojis = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐤"].shuffled()
-    //let fruitEmojis = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍒","🥭"].shuffled()
-    //let faceEmojis = ["😀","😍","😝","🤪","😎","😱","😴","😲"].shuffled()
-    //let vehicleEmojis = ["✈️","🚁","🚘","🚀","🚤","⛵️","🚜","🚌","🚲"].shuffled()
     
     
     // intents allow users to get / chnge cards

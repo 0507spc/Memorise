@@ -13,7 +13,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // memory game onl
     var cards: Array<Card>
     
     // This is for matching in the game
-    var indexOfTehOneAndOnlyFaceUpCard: Int? {
+    var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
                 
             // Below is replaced by above
@@ -58,7 +58,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // memory game onl
         //let chosenIndex: Int = self.index(of: card)
         // after the && is for matching component, , is sequential && (so && = ,)
         if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched { // run when NOT nil
-            if let potentialMatchIndex = indexOfTehOneAndOnlyFaceUpCard {
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
                 // == can't do ==, as it is a don't care it doesn't know the type
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     // we have a match
@@ -73,7 +73,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable { // memory game onl
                 //for index in cards.indices {
                 //    cards[index].isFaceUp = false
                 //}
-                indexOfTehOneAndOnlyFaceUpCard = chosenIndex
+                indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
             
             // get card out of array and flip
