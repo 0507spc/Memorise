@@ -38,7 +38,26 @@ class EmojiMemoryGame: ObservableObject {
         //let emojis = ["🎃","👻","💀","👽","🕷"]
         // MARK: A1.Q2 & A1.Q4.A
         // This shuffles the array of cards to use, then we need to shuffle the actual "deck"
-        let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled() // TODO: shuffle below as well otherwise they are all still together in pairs
+        
+        // TODO: This needs to be seperate and have the various options:
+        //      Name of Theme
+        //      Set of Emoji
+        //      Number of cards to show
+        //      One theme should be random number of cards to show
+        //      Appropriate colour - i.e. halloween is orange
+        // Themes should be 1 line of code
+        let halloweenEmojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
+        let sportsBallsEmojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"].shuffled()
+        let animalEmojis = ["🐶","🐱","🐭","🐹","🐰","🐻","🐼","🐯","🦁","🐮","🐷","🐸","🐵","🐤"].shuffled()
+        let fruitEmojis = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍒","🥭"].shuffled()
+        let faceEmojis = ["😀","😍","😝","🤪","😎","😱","😴","😲"].shuffled()
+        let vehicleEmojis = ["✈️","🚁","🚘","🚀","🚤","⛵️","🚜","🚌","🚲"].shuffled()
+        
+        let themesArray = [halloweenEmojis,sportsBallsEmojis,animalEmojis,fruitEmojis,faceEmojis,vehicleEmojis].shuffled()
+        
+        //let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled() // TODO: shuffle below as well otherwise they are all still together in pairs
+        let emojis = themesArray[0]
+        
         // the double shuffle is to make 2 pairs not always have the same emojis
         // MARK: A1.Q4.B
         //return MemoryGame<String>(numberOfPairsOfCards: emojis.count) { pairIndex in
@@ -59,10 +78,12 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     // here could be the get theme function
-    //let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
-    //let emojis = [⚽️🏀🏈⚾️🥎🎾🎱🏉🏐].shuffled()
-    //let emojis = [🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵🐤].shuffled()
-    //let emojis = [🍏🍎🍐🍊🍋🍌🍉🍇🍓🍒🥭].shuffled()
+    //let halloweenEmojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
+    //let sportsBallsEmojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"].shuffled()
+    //let animalEmojis = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐤"].shuffled()
+    //let fruitEmojis = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍒","🥭"].shuffled()
+    //let faceEmojis = ["😀","😍","😝","🤪","😎","😱","😴","😲"].shuffled()
+    //let vehicleEmojis = ["✈️","🚁","🚘","🚀","🚤","⛵️","🚜","🚌","🚲"].shuffled()
     
     
     // intents allow users to get / chnge cards
