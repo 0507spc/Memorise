@@ -47,18 +47,32 @@ class EmojiMemoryGame: ObservableObject {
         //      Appropriate colour - i.e. halloween is orange
         // need a function that takes, name, array of emoji, number to use (or random i.e. none) , colour
         // Themes should be 1 line of code
-        /*
-        let halloweenEmojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled()
-        let sportsBallsEmojis = ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"].shuffled()
-        let animalEmojis = ["🐶","🐱","🐭","🐹","🐰","🐻","🐼","🐯","🦁","🐮","🐷","🐸","🐵","🐤"].shuffled()
-        let fruitEmojis = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🍒","🥭"].shuffled()
-        let faceEmojis = ["😀","😍","😝","🤪","😎","😱","😴","😲"].shuffled()
-        let vehicleEmojis = ["✈️","🚁","🚘","🚀","🚤","⛵️","🚜","🚌","🚲"].shuffled()
-        */
-        let themesArray = ["halloween","sport","animal","fruit","face","vehicle"].shuffled()
+        enum Theme {
+            case halloween
+            case sport
+            case animal
+            case fruit
+            case face
+            case vehicle
+            
+            var info: (nameOfTheme: String, descriptionOfTheme: String, emojiDeck: Array<String>, numberCards: Int, themeColour: String) {
+                switch self {
+                    case .halloween: return ("halloween", "Spooky Halloween", ["🎃","👻","💀","👽","🕷","🤮"], 6, "Orange")
+                    case .sport: return ("sports", "Sport Balls", ["⚽️","🏀","🏈","⚾️","🥎","🎾","🎱","🏉","🏐"], 9, "Green")
+                    case .animal: return ("animals", "Random Animals", ["🐶","🐱","🐰","🦁","🐮","🐷","🐸","🐵","🐤"], 9, "Yellow")
+                    case .fruit: return ("fruit", "Common Fruits", ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍓","🍒","🥭"], 10, "Red")
+                    case .face: return ("face", "Faces", ["😀","😍","😝","🤪","😎","😱","😴","😲"], 8, "Black")
+                    case .vehicle: return ("vehicle", "Vehicles & Transport", ["✈️","🚁","🚘","🚀","⛵️","🚜","🚌","🚲"], 9, "Grey")
+                    }
+                }
+            }
+
+        //let errorCode = Theme.halloween.info.descriptionOfTheme
+        //let themesArray = ["halloween","sport","animal","fruit","face","vehicle"].shuffled()
         
         //let emojis = ["🎃","👻","💀","👽","🕷","🤮"].shuffled() // TODO: shuffle below as well otherwise they are all still together in pairs
-        let emojis = themesArray[0]
+        //let emojis = themesArray[0]
+        let emojis = Theme.sport.info.emojiDeck.shuffled()
         
         // the double shuffle is to make 2 pairs not always have the same emojis
         // MARK: A1.Q4.B
@@ -72,9 +86,6 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    enum theme {
-        case case
-    }
     
     // MARK: - Access to the Model / i.e. cards
     
