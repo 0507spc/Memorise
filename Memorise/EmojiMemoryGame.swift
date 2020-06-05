@@ -66,7 +66,8 @@ class EmojiMemoryGame: ObservableObject {
                     }
                 }
             }
-
+                
+        
         //let errorCode = Theme.halloween.info.descriptionOfTheme
         //let themesArray = ["halloween","sport","animal","fruit","face","vehicle"].shuffled()
         
